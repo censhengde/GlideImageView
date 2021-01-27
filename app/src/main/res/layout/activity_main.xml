@@ -9,10 +9,20 @@
   <com.tencent.glideimageview.GlideImageView
       android:id="@+id/glideImageView"
       android:layout_width="match_parent"
+      android:layout_marginTop="20dp"
       android:layout_height="200dp"
-      android:scaleType="center"
-      app:errorSrc="@mipmap/ic_launcher"
-      app:placeholderSrc="@color/colorPrimary"
-      app:diskCacheStrategy="data"/>
+      app:errorSrc="@mipmap/ic_error"
+      app:placeholderSrc="@mipmap/ic_loading"
+      app:dontAnimate="true"
+      app:diskCacheStrategy="none"/>
+
+  <Button
+      android:layout_width="100dp"
+      android:layout_height="60dp"
+      android:layout_below="@id/glideImageView"
+      android:layout_centerHorizontal="true"
+      android:onClick="load"
+      android:layout_marginTop="50dp"
+      android:text="开始加载" />
 
 </RelativeLayout>

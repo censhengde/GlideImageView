@@ -24,20 +24,27 @@ class GlideImageView @JvmOverloads constructor(
         const val ALL = 1;
         const val DATA = 2;
         const val RESOURCE = 3;
-        const val AUTOMATIC = 4;
+        const val AUTOMATIC = 4;//默认
+        fun clearMemoryCache(context: Context) {
+            Glide.get(context).clearMemory()
+        }
 
     }
 
     private val errorId: Drawable?
     private val placeholder: Drawable?
     private val diskCacheStrategy: Int
+    private val skipMemoryCache: Boolean
+    private val dontAnimate: Boolean
 
     init {
         val a = context.obtainStyledAttributes(attrs, R.styleable.GlideImageView)
         errorId = a.getDrawable(R.styleable.GlideImageView_errorSrc)
         placeholder = a.getDrawable(R.styleable.GlideImageView_placeholderSrc)
-        diskCacheStrategy = a.getInt(R.styleable.GlideImageView_diskCacheStrategy, DiskCacheStrategy.NONE)
-
+        diskCacheStrategy =
+            a.getInt(R.styleable.GlideImageView_diskCacheStrategy, DiskCacheStrategy.AUTOMATIC)
+        skipMemoryCache = a.getBoolean(R.styleable.GlideImageView_skipMemoryCache, false)
+        dontAnimate = a.getBoolean(R.styleable.GlideImageView_dontAnimate, false)
         a.recycle()
 
 
@@ -65,7 +72,12 @@ class GlideImageView @JvmOverloads constructor(
             RESOURCE->builder.diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.RESOURCE)
             AUTOMATIC->builder.diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.AUTOMATIC)
         }
-
+        if (skipMemoryCache){
+            builder.skipMemoryCache(skipMemoryCache)
+        }
+        if (dontAnimate){
+            builder.dontAnimate()
+        }
            builder .into(this)
 
     }

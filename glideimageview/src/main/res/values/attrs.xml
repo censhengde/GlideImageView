@@ -10,5 +10,7 @@
             <enum name="resource" value="3"/>
             <enum name="automatic" value="4"/>
         </attr>
+        <attr name="skipMemoryCache" format="boolean"/>
+        <attr name="dontAnimate" format="boolean"/>
     </declare-styleable>
 </resources>
